@@ -29,7 +29,6 @@ Document the new repo split
 - https://github.com/johndoe6345789/AutoMetabuilder
 - https://github.com/johndoe6345789/SparkOS
 - https://github.com/johndoe6345789/typthon
-- 
 
 ### Auxillery repos to support the other ones
 
@@ -37,4 +36,20 @@ Document the new repo split
 - https://github.com/johndoe6345789/jenkins
 - https://github.com/johndoe6345789/codingstandards
 - https://github.com/johndoe6345789/dashy
-- 
+
+## Progress Tracking
+
+Tracks the actual split work: which fat repo (source) is feeding which single repo (destination), and where that migration stands.
+
+<!--
+TODO: fill in the real source -> destination pairs and current status below.
+Only you know which fat repo's code is landing in which single repo, and
+how far along each one is — that mapping isn't recoverable from the repo
+list above. Suggested status values: Not started / In progress / Done.
+-->
+
+| Source (fat repo) | Destination (single repo) | Status |
+| --- | --- | --- |
+| metabuilder | TODO | Not started |
+| next_extra_primary | TODO | Not started |
+| businessplanner | TODO | Not started |
