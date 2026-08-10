@@ -1,6 +1,30 @@
 # reposplit
 Document the new repo split
 
+## Strategy
+
+Proper planning prevents piss poor performance.
+
+- **Fat repos are being phased out.** Investigation showed real, and in
+  places diverging, code duplication between the fat repos and the
+  standalone repos they were supposed to feed (e.g. `RepoForge`'s
+  Android app source is byte-identical to `metabuilder/frontends/repoforge`,
+  while other pairs like `SDL3CPlusPlus` vs `metabuilder/frontends/gameengine`
+  have already forked apart). Rather than reconciling that drift, the plan
+  is to move to lots of small, single-purpose repos and retire the fat
+  repos once nothing of value is left in them.
+- **No git history hacks.** Moving code out of a fat repo into its small
+  repo is plain file copy/edit + a normal commit in the destination repo —
+  no `git filter-repo`, `subtree split`, or other history-rewriting tools.
+- **Dev-time merging.** Since day-to-day development benefits from having
+  everything in one working tree, the plan is to build an argparse-based
+  Python script that assembles the small repos into a combined dev
+  workspace on demand (source of truth stays in each small repo; the
+  workspace is just a local convenience view). Mechanism (symlinks vs.
+  copy vs. git worktree/subtree) and where it reads the repo → mount-path
+  mapping from (a dedicated config file vs. the tables below) are still
+  open — TODO once decided.
+
 ### Fat Repos
 
 - https://github.com/johndoe6345789/metabuilder
@@ -66,8 +90,9 @@ These two share an almost identical `services/` layout — LaunchPad appears to 
 | RevolutionaryWayToServeUpReactApps | `shared/` (components, hooks, icons, interfaces, redux, schemas, scss, storybook, theme, constants), `services/design-system` |
 | strategy-execution-p (businessplanner only) | `hoshin`, `okr`, `pdca`, `pivot`, `decisions`, `weekly-review`, `scoping`, `kpi` |
 | workforce-pay-bill-p (businessplanner only) | `financials`, `xero`, `zelt` |
+| pyracms_core *(medium-weight repo, not a Single repo)* | `blog`, `wiki`, `comments*`, `polls`, `gallery` |
 
-**Unassigned:** `gamification*`, `badges`, `leaderboards`, `levels`, `streaks`, `xp`; `social*`, `comments*`, `blog`, `wiki`, `polls`, `gallery`; `ai-chat`, `ai-service`; `media-service`, `image`, `video`, `pdf`, `content-service`; `search*`, `elasticsearch`, `analytics*`, `api-documentation`; `notifications*`, `email`, `webhooks`, `imap-sync`; `ecommerce`, `commerce-service`; (businessplanner only) `gdpr`, `legal-team`, `market-research`, `risk-assessment`, `startup-types`, `accelerators`, `organisations`.
+**Unassigned:** `gamification*`, `badges`, `leaderboards`, `levels`, `streaks`, `xp`; `social*`; `ai-chat`, `ai-service`; `media-service`, `image`, `video`, `pdf`, `content-service`; `search*`, `elasticsearch`, `analytics*`, `api-documentation`; `notifications*`, `email`, `webhooks`, `imap-sync`; `ecommerce`, `commerce-service`; (businessplanner only) `gdpr`, `legal-team`, `market-research`, `risk-assessment`, `startup-types`, `accelerators`, `organisations`.
 
 `BlockWar`, `WizardMerge`, `MetalOS`, and `winejs` didn't obviously map to any source folder in these three repos.
 
