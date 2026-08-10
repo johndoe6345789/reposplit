@@ -63,7 +63,7 @@ Proper planning prevents piss poor performance. Keep it simple, stupid.
 
 ## Suggested Micro-Repo Names
 
-Based on scanning the directory structure of the three fat repos (`packages/`, `frontends/`, `libraries/`, `services/`, `shared/`), here's which existing entries from the Single repos list above look like they map to which source folders. Clusters with no obvious existing-name fit are left unassigned rather than guessing a new name.
+Based on scanning the directory structure of the three fat repos (`packages/`, `frontends/`, `libraries/`, `services/`, `shared/`), here's which existing entries from the Single repos list above look like they map to which source folders. Where nothing existing fits, the proposed name is just the literal name of the source folder — no invented branding.
 
 ### From `metabuilder`
 
@@ -78,7 +78,22 @@ Based on scanning the directory structure of the three fat repos (`packages/`, `
 | AutoMetabuilder | `frontends/nextjs` shell, `packages/admin*`, `ui_auth`, `ui_login`, `ui_permissions`, `role_editor`, `user_manager`, `audit_log`, `dashboard`, `nav_menu`, `ui_header/footer/home/intro/pages`, `notification_center`, `config_summary`, `libraries/workflow`, `packages/workflow_editor`, `frontends/workflowui`, `packages/workflowui-*` |
 | typthon | `scripts/python`, `scripts/*.py` |
 
-**Unassigned:** `libraries/components`, `icons`, `scss`, `hooks`, `types`, `redux`, `interfaces`, `schemas`, `translations` (M3 component library); `packages/codegen_studio`, `code_editor`, `nerd_mode_ide` (code-gen IDE); `packages/email_client`, `smtp_config`, `services/smtprelay` (email client); `packages/database_manager`, `dbal_core`, `dbal_demo`, `frontends/dbal`, `libraries/dbal` (DB admin); `libraries/cadquerywrapper`, `pcbgenerator`, `frontends/qt6` (CAD/PCB); `packages/media_center`, `stream_cast`, `services/media_daemon`, `services/radio`, `frontends/discjockey` (media/radio); `packages/forum_forge`, `social_hub`, `irc_webchat`; `frontends/caproverforge`; `packages/geocities-app`; `packages/api_tests`, `smoke_tests`, `testing`, `system_critical_flows`, `e2e/` (QA harness).
+No existing name fit these, so the proposed name is just the literal name of the source folder itself:
+
+| Proposed name (new repo) | Source paths |
+| --- | --- |
+| `m3` | `libraries/components`, `icons`, `scss`, `hooks`, `types`, `redux`, `interfaces`, `schemas`, `translations` |
+| `codegen_studio` | `packages/codegen_studio`, `frontends/codegen` |
+| `code_editor` | `packages/code_editor`, `nerd_mode_ide` |
+| `email_client` | `packages/email_client`, `smtp_config`, `services/smtprelay` |
+| `dbal` | `packages/database_manager`, `dbal_core`, `dbal_demo`, `frontends/dbal`, `libraries/dbal` |
+| `cadquerywrapper` | `libraries/cadquerywrapper` |
+| `pcbgenerator` | `libraries/pcbgenerator`, `frontends/qt6` |
+| `media_center` | `packages/media_center`, `stream_cast`, `services/media_daemon`, `services/radio`, `frontends/discjockey` |
+| `forum_forge` | `packages/forum_forge`, `social_hub`, `irc_webchat` |
+| `caproverforge` | `frontends/caproverforge` |
+| `geocities-app` | `packages/geocities-app` |
+| `testing` | `packages/api_tests`, `smoke_tests`, `testing`, `system_critical_flows`, `e2e/` |
 
 ### From `next_extra_primary` ("Nextra") and `businessplanner` ("LaunchPad")
 
@@ -92,7 +107,25 @@ These two share an almost identical `services/` layout — LaunchPad appears to 
 | workforce-pay-bill-p (businessplanner only) | `financials`, `xero`, `zelt` |
 | pyracms_core *(medium-weight repo, not a Single repo)* | `blog`, `wiki`, `comments*`, `polls`, `gallery` |
 
-**Unassigned:** `gamification*`, `badges`, `leaderboards`, `levels`, `streaks`, `xp`; `social*`; `ai-chat`, `ai-service`; `media-service`, `image`, `video`, `pdf`, `content-service`; `search*`, `elasticsearch`, `analytics*`, `api-documentation`; `notifications*`, `email`, `webhooks`, `imap-sync`; `ecommerce`, `commerce-service`; (businessplanner only) `gdpr`, `legal-team`, `market-research`, `risk-assessment`, `startup-types`, `accelerators`, `organisations`.
+No existing name fit these either — same rule, proposed name is just the literal source folder name:
+
+| Proposed name (new repo) | Source paths |
+| --- | --- |
+| `gamification` | `gamification*`, `badges`, `leaderboards`, `levels`, `streaks`, `xp` |
+| `social` | `social*` |
+| `ai-chat` | `ai-chat`, `ai-service` |
+| `content-service` | `media-service`, `image`, `video`, `pdf`, `content-service` |
+| `search` | `search*`, `elasticsearch` |
+| `analytics` | `analytics*`, `api-documentation` |
+| `notifications` | `notifications*`, `email`, `webhooks`, `imap-sync` |
+| `ecommerce` | `ecommerce`, `commerce-service` |
+| `gdpr` *(businessplanner only)* | `gdpr` |
+| `legal-team` *(businessplanner only)* | `legal-team` |
+| `market-research` *(businessplanner only)* | `market-research` |
+| `risk-assessment` *(businessplanner only)* | `risk-assessment` |
+| `startup-types` *(businessplanner only)* | `startup-types` |
+| `accelerators` *(businessplanner only)* | `accelerators` |
+| `organisations` *(businessplanner only)* | `organisations` |
 
 `BlockWar`, `WizardMerge`, `MetalOS`, and `winejs` didn't obviously map to any source folder in these three repos.
 
