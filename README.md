@@ -3,7 +3,7 @@ Document the new repo split
 
 ## Strategy
 
-Proper planning prevents piss poor performance.
+Proper planning prevents piss poor performance. Keep it simple, stupid.
 
 - **Fat repos are being phased out.** Investigation showed real, and in
   places diverging, code duplication between the fat repos and the
