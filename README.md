@@ -54,6 +54,29 @@ Proper planning prevents piss poor performance. Keep it simple, stupid.
 - https://github.com/johndoe6345789/AutoMetabuilder
 - https://github.com/johndoe6345789/SparkOS
 - https://github.com/johndoe6345789/typthon
+- https://github.com/johndoe6345789/m3
+- https://github.com/johndoe6345789/codegen_studio
+- https://github.com/johndoe6345789/code_editor
+- https://github.com/johndoe6345789/email_client
+- https://github.com/johndoe6345789/dbal
+- https://github.com/johndoe6345789/media_center
+- https://github.com/johndoe6345789/geocities-app
+- https://github.com/johndoe6345789/testing
+- https://github.com/johndoe6345789/gamification
+- https://github.com/johndoe6345789/social
+- https://github.com/johndoe6345789/ai-chat
+- https://github.com/johndoe6345789/content-service
+- https://github.com/johndoe6345789/search
+- https://github.com/johndoe6345789/analytics
+- https://github.com/johndoe6345789/notifications
+- https://github.com/johndoe6345789/ecommerce
+- https://github.com/johndoe6345789/gdpr
+- https://github.com/johndoe6345789/legal-team
+- https://github.com/johndoe6345789/market-research
+- https://github.com/johndoe6345789/risk-assessment
+- https://github.com/johndoe6345789/startup-types
+- https://github.com/johndoe6345789/accelerators
+- https://github.com/johndoe6345789/organisations
 
 ### Auxillery repos to support the other ones
 
@@ -70,7 +93,8 @@ Based on scanning the directory structure of the three fat repos (`packages/`, `
 
 | Existing name | Source paths |
 | --- | --- |
-| RepoForge | `frontends/repoforge`, `frontends/packagerepo`, `packages/package_manager`, `packages/package_validator`, `packages/github_tools` |
+| RepoForge | `frontends/repoforge` *(confirmed byte-identical Android app source — not the package registry, see `goodpackagerepo` below)* |
+| goodpackagerepo | `frontends/packagerepo`, `packages/package_manager`, `packages/package_validator`, `packages/github_tools` |
 | SparkOS | `libraries/sparkos` |
 | SDL3CPlusPlus | `frontends/gameengine`, `packages/arcade_lobby` |
 | snippet-pastebin | `frontends/pastebin`, `packages/screenshot_analyzer` |
@@ -78,21 +102,21 @@ Based on scanning the directory structure of the three fat repos (`packages/`, `
 | low-code-react-app-b | `packages/form_builder`, `css_designer`, `theme_editor`, `component_editor`, `schema_editor`, `ui_json_script_editor` |
 | AutoMetabuilder | `frontends/nextjs` shell, `packages/admin*`, `ui_auth`, `ui_login`, `ui_permissions`, `role_editor`, `user_manager`, `audit_log`, `dashboard`, `nav_menu`, `ui_header/footer/home/intro/pages`, `notification_center`, `config_summary`, `libraries/workflow`, `packages/workflow_editor`, `frontends/workflowui`, `packages/workflowui-*` |
 | typthon | `scripts/python`, `scripts/*.py` |
+| cadquerywrapper | `libraries/cadquerywrapper` |
+| pcbgenerator | `libraries/pcbgenerator`, `frontends/qt6` |
+| CaproverForge | `frontends/caproverforge` |
+| pyracms_forum | `packages/forum_forge`, `social_hub`, `irc_webchat` |
 
-No existing name fit these, so the proposed name is just the literal name of the source folder itself:
+No existing name fit these, so the proposed name is just the literal name of the source folder itself. **Created and populated 2026-08-11** — each was pushed to GitHub with the listed source paths copied in as-is.
 
-| Proposed name (new repo) | Source paths |
+| Repo (now created) | Source paths |
 | --- | --- |
 | `m3` | `libraries/components`, `icons`, `scss`, `hooks`, `types`, `redux`, `interfaces`, `schemas`, `translations` |
 | `codegen_studio` | `packages/codegen_studio`, `frontends/codegen` |
 | `code_editor` | `packages/code_editor`, `nerd_mode_ide` |
 | `email_client` | `packages/email_client`, `smtp_config`, `services/smtprelay` |
 | `dbal` | `packages/database_manager`, `dbal_core`, `dbal_demo`, `frontends/dbal`, `libraries/dbal` |
-| `cadquerywrapper` | `libraries/cadquerywrapper` |
-| `pcbgenerator` | `libraries/pcbgenerator`, `frontends/qt6` |
 | `media_center` | `packages/media_center`, `stream_cast`, `services/media_daemon`, `services/radio`, `frontends/discjockey` |
-| `forum_forge` | `packages/forum_forge`, `social_hub`, `irc_webchat` |
-| `caproverforge` | `frontends/caproverforge` |
 | `geocities-app` | `packages/geocities-app` |
 | `testing` | `packages/api_tests`, `smoke_tests`, `testing`, `system_critical_flows`, `e2e/` |
 
@@ -106,11 +130,13 @@ These two share an almost identical `services/` layout — LaunchPad appears to 
 | RevolutionaryWayToServeUpReactApps | `shared/` (components, hooks, icons, interfaces, redux, schemas, scss, storybook, theme, constants), `services/design-system` |
 | strategy-execution-p (businessplanner only) | `hoshin`, `okr`, `pdca`, `pivot`, `decisions`, `weekly-review`, `scoping`, `kpi` |
 | workforce-pay-bill-p (businessplanner only) | `financials`, `xero`, `zelt` |
-| pyracms_core *(medium-weight repo, not a Single repo)* | `blog`, `wiki`, `comments*`, `polls`, `gallery` |
+| pyracms_core *(medium-weight repo, not a Single repo)* | `wiki`, `comments*`, `polls` |
+| pyracms_gallery | `gallery` |
+| pyracms_article | `blog` |
 
-No existing name fit these either — same rule, proposed name is just the literal source folder name:
+No existing name fit these either. **Created and populated 2026-08-11**, sourced from `next_extra_primary` except the businessplanner-only rows, which came from `businessplanner`:
 
-| Proposed name (new repo) | Source paths |
+| Repo (now created) | Source paths |
 | --- | --- |
 | `gamification` | `gamification*`, `badges`, `leaderboards`, `levels`, `streaks`, `xp` |
 | `social` | `social*` |
