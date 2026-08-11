@@ -81,6 +81,19 @@ Proper planning prevents piss poor performance. Keep it simple, stupid.
 - https://github.com/johndoe6345789/exploded-diagrams
 - https://github.com/johndoe6345789/storybook
 - https://github.com/johndoe6345789/dockerterminal-backend
+- https://github.com/johndoe6345789/metabuilder-scripts
+- https://github.com/johndoe6345789/design-system
+- https://github.com/johndoe6345789/platform-core
+- https://github.com/johndoe6345789/mojo
+- https://github.com/johndoe6345789/components
+- https://github.com/johndoe6345789/hooks
+- https://github.com/johndoe6345789/icons
+- https://github.com/johndoe6345789/interfaces
+- https://github.com/johndoe6345789/redux
+- https://github.com/johndoe6345789/schemas
+- https://github.com/johndoe6345789/scss
+- https://github.com/johndoe6345789/translations
+- https://github.com/johndoe6345789/types
 
 ### Auxillery repos to support the other ones
 
@@ -204,6 +217,14 @@ Before trimming `frontends/`, checked the remaining "Existing name" matches from
 - **Not yet checked:** `packages/package_manager`, `package_validator`, `github_tools` → `goodpackagerepo`.
 
 These weren't touched — no clean "newer wins" case to act on, and the wrong matches need real destinations decided separately rather than forced.
+
+## Migration Status — `metabuilder/libraries/` (2026-08-11)
+
+Following the same "wrong match → new repo" rule applied to `frontends/`:
+
+- **New repos created** for content with no real existing match: `mojo` (Mojo language compiler/tooling), `metabuilder-scripts` (replaces the wrong `typthon` match), `design-system` (replaces the wrong `RevolutionaryWayToServeUpReactApps` match — this is `next_extra_primary/shared/` + `services/design-system`), `platform-core` (replaces the wrong `nexus-command` match — `next_extra_primary/services/{auth,sso,users,api-keys,audit,rate-limit,feature-flags,i18n,database,orm-models,migrate-service,migration-runner,job-queue,cron,infra,platform-service,service-host,drogon-host,http-filters,manager-cli,portal,status-page,backup,object-store}`).
+- **Merged into existing repos:** `libraries/qml` → `CPlusPlusQT6Skel` (its QML component library). `libraries/workflow` + `packages/workflow_editor` → `AutoMetabuilder` (previously only *mapped* to it in the tables above, never actually copied — fixed now).
+- **`metabuilder/libraries/` emptied entirely** — every one of its 16 folders now has a confirmed home (the rest were already-synced matches: `cadquerywrapper`, `components`→`m3`'s split repos, `dbal`, `pcbgenerator`, `sparkos`, etc.)
 
 ## Progress Tracking
 
