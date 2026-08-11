@@ -270,17 +270,17 @@ Same treatment as `metabuilder`: found and fixed the services that were never ac
 
 ## Progress Tracking
 
-Tracks the actual split work: which fat repo (source) is feeding which single repo (destination), and where that migration stands.
+**The split itself is done.** All three fat repos have had their application code migrated out — see the Migration Status sections above for the full source → destination mapping. 77 repos are now tracked in this README.
 
-<!--
-TODO: fill in the real source -> destination pairs and current status below.
-Only you know which fat repo's code is landing in which single repo, and
-how far along each one is — that mapping isn't recoverable from the repo
-list above. Suggested status values: Not started / In progress / Done.
--->
+| Source (fat repo) | Status |
+| --- | --- |
+| metabuilder | Done — only `frontends/{cli,nextjs,qt6}` kept intentionally, plus build tooling (`config/`, `deployment/`, `docs/`, `scripts/`) |
+| next_extra_primary | Done — only build/deploy tooling and `docs/` left |
+| businessplanner | Done — only build/deploy tooling and `docs/` left |
 
-| Source (fat repo) | Destination (single repo) | Status |
-| --- | --- | --- |
-| metabuilder | TODO | Not started |
-| next_extra_primary | TODO | Not started |
-| businessplanner | TODO | Not started |
+**Open items — not blocking, but not finished either:**
+
+1. **The dev-time merge script** (planned in Strategy above) only exists for the `m3` family so far (`m3/checkout.py`) — not generalized to check out any/all of the 77 split repos on demand.
+2. **`docker-swarm-termina`'s backend question was resolved by not choosing** — the real (tested, Python) backend stayed as-is, and metabuilder's alternate C++/Drogon implementation got its own repo (`dockerterminal-backend`) rather than replacing it. Both exist independently; nobody's decided if that's the final state or if one should go away.
+3. **`metabuilder/config/`, `deployment/`, and `docs/` (the non-`old/` parts) were never addressed** — still sitting in `metabuilder` alongside the three kept frontends. May be fine to leave (build tooling, arguably belongs with the frontends that use it) or may need its own pass.
+4. **The `archesky-*` and `storage-*` repo families** were noticed early on as possibly better matches for parts of `platform-core`'s cluster, but never actually investigated — flagged once, not resolved.
