@@ -281,6 +281,6 @@ Same treatment as `metabuilder`: found and fixed the services that were never ac
 **Open items — not blocking, but not finished either:**
 
 1. **The dev-time merge script** (planned in Strategy above) only exists for the `m3` family so far (`m3/checkout.py`) — not generalized to check out any/all of the 77 split repos on demand.
-2. **`docker-swarm-termina`'s backend question was resolved by not choosing** — the real (tested, Python) backend stayed as-is, and metabuilder's alternate C++/Drogon implementation got its own repo (`dockerterminal-backend`) rather than replacing it. Both exist independently; nobody's decided if that's the final state or if one should go away.
+2. ~~`docker-swarm-termina`'s backend question~~ **Resolved 2026-08-11: project standard is C++ backends, not Python.** Swapped `docker-swarm-termina`'s Python backend for the C++/Drogon one. `dockerterminal-backend` is now redundant (its content is duplicated in `docker-swarm-termina/backend/`) — not yet deleted, pending confirmation.
 3. **`metabuilder/config/`, `deployment/`, and `docs/` (the non-`old/` parts) were never addressed** — still sitting in `metabuilder` alongside the three kept frontends. May be fine to leave (build tooling, arguably belongs with the frontends that use it) or may need its own pass.
 4. **The `archesky-*` and `storage-*` repo families** were noticed early on as possibly better matches for parts of `platform-core`'s cluster, but never actually investigated — flagged once, not resolved.
