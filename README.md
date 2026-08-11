@@ -86,6 +86,8 @@ Proper planning prevents piss poor performance. Keep it simple, stupid.
 - https://github.com/johndoe6345789/platform-core
 - https://github.com/johndoe6345789/mojo
 - https://github.com/johndoe6345789/packages
+- https://github.com/johndoe6345789/object-store
+- https://github.com/johndoe6345789/plugin-registry
 - https://github.com/johndoe6345789/components
 - https://github.com/johndoe6345789/hooks
 - https://github.com/johndoe6345789/icons
@@ -232,6 +234,12 @@ Following the same "wrong match → new repo" rule applied to `frontends/`:
 Bundled the remaining 68 packages (everything not already migrated to `codegen_studio`, `code_editor`, `email_client`, `dbal`, `media_center`, `geocities-app`, `testing`, or `AutoMetabuilder`) into one new repo, **`packages`**, rather than splitting each into its own repo — a deliberate simpler pass here rather than atomizing further.
 
 **`metabuilder/packages/` is now empty.** One open dependency risk worth noting: the admin/auth/dashboard packages (`admin`, `ui_auth`, `ui_login`, `ui_permissions`, `role_editor`, `user_manager`, `audit_log`, `dashboard`, `nav_menu`, `ui_header/footer/home/intro/pages`, `notification_center`, `config_summary`) moved out with this batch even though `frontends/nextjs` — which renders them — stays in `metabuilder`. That coupling may need reconciling (e.g. nextjs pulling them back in as a dependency) rather than being a clean split.
+
+## Migration Status — `metabuilder/services/` (2026-08-11)
+
+`media_daemon` and `radio` were already migrated to `media_center`; `smtprelay` was already migrated to `email_client`. `object-store` and `plugin-registry` had no clear existing match (a `storage-*` repo family exists but wasn't confirmed to align — one candidate is completely empty, others unverified), so each got its own new repo rather than guessing. **`metabuilder/services/` is now empty.**
+
+`metabuilder` now only has `frontends/{cli,nextjs,qt6}` left from its original domains — everything else has been split out.
 
 ## Progress Tracking
 
