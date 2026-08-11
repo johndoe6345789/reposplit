@@ -85,6 +85,7 @@ Proper planning prevents piss poor performance. Keep it simple, stupid.
 - https://github.com/johndoe6345789/design-system
 - https://github.com/johndoe6345789/platform-core
 - https://github.com/johndoe6345789/mojo
+- https://github.com/johndoe6345789/packages
 - https://github.com/johndoe6345789/components
 - https://github.com/johndoe6345789/hooks
 - https://github.com/johndoe6345789/icons
@@ -225,6 +226,12 @@ Following the same "wrong match → new repo" rule applied to `frontends/`:
 - **New repos created** for content with no real existing match: `mojo` (Mojo language compiler/tooling), `metabuilder-scripts` (replaces the wrong `typthon` match), `design-system` (replaces the wrong `RevolutionaryWayToServeUpReactApps` match — this is `next_extra_primary/shared/` + `services/design-system`), `platform-core` (replaces the wrong `nexus-command` match — `next_extra_primary/services/{auth,sso,users,api-keys,audit,rate-limit,feature-flags,i18n,database,orm-models,migrate-service,migration-runner,job-queue,cron,infra,platform-service,service-host,drogon-host,http-filters,manager-cli,portal,status-page,backup,object-store}`).
 - **Merged into existing repos:** `libraries/qml` → `CPlusPlusQT6Skel` (its QML component library). `libraries/workflow` + `packages/workflow_editor` → `AutoMetabuilder` (previously only *mapped* to it in the tables above, never actually copied — fixed now).
 - **`metabuilder/libraries/` emptied entirely** — every one of its 16 folders now has a confirmed home (the rest were already-synced matches: `cadquerywrapper`, `components`→`m3`'s split repos, `dbal`, `pcbgenerator`, `sparkos`, etc.)
+
+## Migration Status — `metabuilder/packages/` (2026-08-11)
+
+Bundled the remaining 68 packages (everything not already migrated to `codegen_studio`, `code_editor`, `email_client`, `dbal`, `media_center`, `geocities-app`, `testing`, or `AutoMetabuilder`) into one new repo, **`packages`**, rather than splitting each into its own repo — a deliberate simpler pass here rather than atomizing further.
+
+**`metabuilder/packages/` is now empty.** One open dependency risk worth noting: the admin/auth/dashboard packages (`admin`, `ui_auth`, `ui_login`, `ui_permissions`, `role_editor`, `user_manager`, `audit_log`, `dashboard`, `nav_menu`, `ui_header/footer/home/intro/pages`, `notification_center`, `config_summary`) moved out with this batch even though `frontends/nextjs` — which renders them — stays in `metabuilder`. That coupling may need reconciling (e.g. nextjs pulling them back in as a dependency) rather than being a clean split.
 
 ## Progress Tracking
 
