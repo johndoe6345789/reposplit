@@ -90,6 +90,8 @@ Proper planning prevents piss poor performance. Keep it simple, stupid.
 - https://github.com/johndoe6345789/plugin-registry
 - https://github.com/johndoe6345789/metabuilder_e2e
 - https://github.com/johndoe6345789/metabuilder_old
+- https://github.com/johndoe6345789/nextra-frontend
+- https://github.com/johndoe6345789/launchpad-frontend
 - https://github.com/johndoe6345789/components
 - https://github.com/johndoe6345789/hooks
 - https://github.com/johndoe6345789/icons
@@ -246,6 +248,18 @@ Bundled the remaining 68 packages (everything not already migrated to `codegen_s
 **`e2e/` moved to a new `metabuilder_e2e` repo (2026-08-11).**
 
 **`docs/old/` moved to a new `metabuilder_old` repo (2026-08-11).**
+
+## Migration Status — `next_extra_primary/` and `businessplanner/` (2026-08-11)
+
+Same treatment as `metabuilder`: found and fixed the services that were never actually mapped, then trimmed both fat repos to just build/deploy tooling.
+
+**Newly mapped and migrated** (weren't in any table above): `alerts` → `notifications`; `analytics-service` → `analytics`; `auth-service`, `infra-service`, `user-lookup`, `user-preferences`, `user-profiles`, `user-search`, `user-stats` → `platform-core`; `comments-service` → `pyracms_core`; `gamification-service`, `progress` → `gamification`; `notifications-service` (dup of `alerts`, folded into `notifications`); `search-service` → `search`; `social-service` → `social`; `package-repository` → `goodpackagerepo`; `streaming` → `media_center`.
+
+**`frontend/`** — no existing match for either, so each got a new repo: `next_extra_primary/frontend` → `nextra-frontend`, `businessplanner/frontend` → `launchpad-frontend`.
+
+**Deduplication call:** `businessplanner`'s `services/` and `shared/` are near-identical copies of `next_extra_primary`'s (it's built on the same template). Rather than re-diffing every shared service between the two fat repos, `next_extra_primary` was used as the single canonical source (as already established in the tables above) and `businessplanner`'s matching copies were treated as redundant duplicates — trimmed without a separate merge. Only `businessplanner`'s actually-unique domains (strategy execution, billing/payroll, gdpr, legal, market research, etc.) were migrated from `businessplanner` itself.
+
+**Both fat repos are now emptied of application code** — `next_extra_primary` and `businessplanner` each only retain build/deploy tooling (`cmake/`, `docker/`, `deploy/`, Conan scripts) and `docs/`. Both READMEs rewritten to reflect this, same as `metabuilder`'s.
 
 ## Progress Tracking
 
