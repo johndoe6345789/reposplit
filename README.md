@@ -100,7 +100,7 @@ Based on scanning the directory structure of the three fat repos (`packages/`, `
 | snippet-pastebin | `frontends/pastebin`, `packages/screenshot_analyzer` |
 | docker-swarm-termina | `frontends/dockerterminal` |
 | low-code-react-app-b | `packages/form_builder`, `css_designer`, `theme_editor`, `component_editor`, `schema_editor`, `ui_json_script_editor` |
-| AutoMetabuilder | `libraries/workflow`, `packages/workflow_editor`, `frontends/workflowui` *(merged 2026-08-11)*, `packages/workflowui-*` |
+| AutoMetabuilder | `libraries/workflow`, `packages/workflow_editor`, `frontends/workflowui` *(added as `workflowui/` subfolder, 2026-08-11 — see note below)*, `packages/workflowui-*` |
 | typthon | `scripts/python`, `scripts/*.py` |
 | cadquerywrapper | `libraries/cadquerywrapper` |
 | pcbgenerator | `libraries/pcbgenerator` *(confirmed near-identical, already in sync)* |
@@ -180,7 +180,7 @@ First pass at actually migrating code (not just mapping names) from `metabuilder
 | `frontends/qt6` | `CPlusPlusQT6Skel` (corrected from an earlier wrong `pcbgenerator` guess) | 2026-08-03 | 2026-07-21 |
 
 **Resolved 2026-08-11:**
-- `frontends/workflowui` → merged into `AutoMetabuilder` (confirmed: workflow UI *is* the same product as AutoMetabuilder's AI-powered SDLC workflow tool, not a mismatch after all).
+- `frontends/workflowui` → merged into `AutoMetabuilder` (confirmed: workflow UI *is* the same product as AutoMetabuilder's AI-powered SDLC workflow tool, not a mismatch after all). **Correction:** the first attempt overlay-copied workflowui straight onto the repo root, which collided with AutoMetabuilder's existing `backend/` + `frontend/` app — two parallel app structures in one repo (root `package.json` named `"workflowui"` sitting next to `frontend/package.json` named `"frontend"`). Reverted that commit with `git revert` (no history rewriting) and redid it as a `workflowui/` subfolder instead. Checked the other 5 merged pairs for the same issue — they were fine because source and destination already shared the same root layout, so this collision was specific to AutoMetabuilder's backend+frontend split structure.
 - `frontends/nextjs` → **stays in `metabuilder`**, not migrated. It's the actual MetaBuilder platform UI itself, along with the admin/auth/dashboard packages it renders (`packages/admin*`, `ui_auth`, `ui_login`, `ui_permissions`, `role_editor`, `user_manager`, `audit_log`, `dashboard`, `nav_menu`, `ui_header/footer/home/intro/pages`, `notification_center`, `config_summary`) — these stay with it rather than being split elsewhere while the shell that consumes them remains in the fat repo.
 
 ## Progress Tracking
