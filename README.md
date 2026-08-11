@@ -88,6 +88,7 @@ Proper planning prevents piss poor performance. Keep it simple, stupid.
 - https://github.com/johndoe6345789/packages
 - https://github.com/johndoe6345789/object-store
 - https://github.com/johndoe6345789/plugin-registry
+- https://github.com/johndoe6345789/metabuilder_e2e
 - https://github.com/johndoe6345789/components
 - https://github.com/johndoe6345789/hooks
 - https://github.com/johndoe6345789/icons
@@ -240,6 +241,8 @@ Bundled the remaining 68 packages (everything not already migrated to `codegen_s
 `media_daemon` and `radio` were already migrated to `media_center`; `smtprelay` was already migrated to `email_client`. `object-store` and `plugin-registry` had no clear existing match (a `storage-*` repo family exists but wasn't confirmed to align — one candidate is completely empty, others unverified), so each got its own new repo rather than guessing. **`metabuilder/services/` is now empty.**
 
 `metabuilder` now only has `frontends/{cli,nextjs,qt6}` left from its original domains — everything else has been split out.
+
+**`e2e/` moved to a new `metabuilder_e2e` repo (2026-08-11).**
 
 ## Progress Tracking
 
