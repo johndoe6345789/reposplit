@@ -94,7 +94,7 @@ Based on scanning the directory structure of the three fat repos (`packages/`, `
 | Existing name | Source paths |
 | --- | --- |
 | RepoForge | `frontends/repoforge` *(confirmed byte-identical Android app source — not the package registry, see `goodpackagerepo` below)* |
-| goodpackagerepo | `frontends/packagerepo`, `packages/package_manager`, `packages/package_validator`, `packages/github_tools` |
+| goodpackagerepo | `frontends/packagerepo` *(confirmed byte-identical, already in sync)*, `packages/package_manager`, `packages/package_validator`, `packages/github_tools` *(not yet migrated)* |
 | SparkOS | `libraries/sparkos` |
 | SDL3CPlusPlus | `frontends/gameengine`, `packages/arcade_lobby` |
 | snippet-pastebin | `frontends/pastebin`, `packages/screenshot_analyzer` |
@@ -103,8 +103,8 @@ Based on scanning the directory structure of the three fat repos (`packages/`, `
 | AutoMetabuilder | `frontends/nextjs` shell, `packages/admin*`, `ui_auth`, `ui_login`, `ui_permissions`, `role_editor`, `user_manager`, `audit_log`, `dashboard`, `nav_menu`, `ui_header/footer/home/intro/pages`, `notification_center`, `config_summary`, `libraries/workflow`, `packages/workflow_editor`, `frontends/workflowui`, `packages/workflowui-*` |
 | typthon | `scripts/python`, `scripts/*.py` |
 | cadquerywrapper | `libraries/cadquerywrapper` |
-| pcbgenerator | `libraries/pcbgenerator`, `frontends/qt6` |
-| CaproverForge | `frontends/caproverforge` |
+| pcbgenerator | `libraries/pcbgenerator` *(confirmed near-identical, already in sync)* |
+| CaproverForge | `frontends/caproverforge` *(confirmed byte-identical, already in sync)* |
 | pyracms_forum | `packages/forum_forge`, `social_hub`, `irc_webchat` |
 
 No existing name fit these, so the proposed name is just the literal name of the source folder itself. **Created and populated 2026-08-11** — each was pushed to GitHub with the listed source paths copied in as-is.
@@ -114,11 +114,14 @@ No existing name fit these, so the proposed name is just the literal name of the
 | `m3` | `libraries/components`, `icons`, `scss`, `hooks`, `types`, `redux`, `interfaces`, `schemas`, `translations` |
 | `codegen_studio` | `packages/codegen_studio`, `frontends/codegen` |
 | `code_editor` | `packages/code_editor`, `nerd_mode_ide` |
-| `email_client` | `packages/email_client`, `smtp_config`, `services/smtprelay` |
+| `email_client` | `packages/email_client`, `smtp_config`, `services/smtprelay`, `frontends/emailclient` *(added 2026-08-11)* |
 | `dbal` | `packages/database_manager`, `dbal_core`, `dbal_demo`, `frontends/dbal`, `libraries/dbal` |
 | `media_center` | `packages/media_center`, `stream_cast`, `services/media_daemon`, `services/radio`, `frontends/discjockey` |
 | `geocities-app` | `packages/geocities-app` |
 | `testing` | `packages/api_tests`, `smoke_tests`, `testing`, `system_critical_flows`, `e2e/` |
+| `cli` | `frontends/cli` *(created 2026-08-11)* |
+| `exploded-diagrams` | `frontends/exploded-diagrams` *(created 2026-08-11)* |
+| `storybook` | `frontends/storybook` *(created 2026-08-11)* |
 
 ### From `next_extra_primary` ("Nextra") and `businessplanner` ("LaunchPad")
 
@@ -155,6 +158,27 @@ No existing name fit these either. **Created and populated 2026-08-11**, sourced
 | `organisations` *(businessplanner only)* | `organisations` |
 
 `BlockWar`, `WizardMerge`, `MetalOS`, and `winejs` didn't obviously map to any source folder in these three repos.
+
+## Migration Status — `metabuilder/frontends/`
+
+First pass at actually migrating code (not just mapping names) from `metabuilder/frontends/*`, 2026-08-11.
+
+**Done — clean copy, no conflict:**
+- `caproverforge`, `frontends/packagerepo`, `libraries/pcbgenerator` were already byte-identical (or near-identical) to `CaproverForge`, `goodpackagerepo`, `pcbgenerator` — nothing to migrate, already in sync.
+- `frontends/emailclient` added to `email_client`.
+- `frontends/repoforge`'s `portal/` folder (the one piece not already in `RepoForge`) added to `RepoForge`.
+- `frontends/cli`, `frontends/exploded-diagrams`, `frontends/storybook` — no existing match, created as new repos `cli`, `exploded-diagrams`, `storybook`.
+
+**Needs a decision before touching — destination already has substantial, independently-evolved content that a blind copy would corrupt:**
+
+| Source | Existing repo | Why it needs a decision |
+| --- | --- | --- |
+| `frontends/dockerterminal` | `docker-swarm-termina` | Diverged fork — different docs, CAPROVER deployment scripts, different file set |
+| `frontends/gameengine` | `SDL3CPlusPlus` | Heavily diverged — destination is 508M vs 199M source, its own package/profile structure |
+| `frontends/nextjs`, `frontends/workflowui` | `AutoMetabuilder` | Likely the wrong match entirely — `AutoMetabuilder`'s real README says it's "an AI-powered tool designed to integrate with the metabuilder SDLC workflow," not a platform/workflow-UI shell |
+| `frontends/pastebin` | `snippet-pastebin` | Heavily diverged — destination is 65M vs 17M source, extensively built out on its own |
+| `frontends/postgres` | `postgres` | Destination is a completely different, real Next.js/Drizzle app ("Postgres with Web UI"), not a Python dashboard |
+| `frontends/qt6` | `CPlusPlusQT6Skel` (corrected from an earlier wrong `pcbgenerator` guess) | Diverged — same general idea (Qt6 skeleton) but different file structure on each side |
 
 ## Progress Tracking
 
