@@ -100,7 +100,7 @@ Based on scanning the directory structure of the three fat repos (`packages/`, `
 | snippet-pastebin | `frontends/pastebin`, `packages/screenshot_analyzer` |
 | docker-swarm-termina | `frontends/dockerterminal` |
 | low-code-react-app-b | `packages/form_builder`, `css_designer`, `theme_editor`, `component_editor`, `schema_editor`, `ui_json_script_editor` |
-| AutoMetabuilder | `frontends/nextjs` shell, `packages/admin*`, `ui_auth`, `ui_login`, `ui_permissions`, `role_editor`, `user_manager`, `audit_log`, `dashboard`, `nav_menu`, `ui_header/footer/home/intro/pages`, `notification_center`, `config_summary`, `libraries/workflow`, `packages/workflow_editor`, `frontends/workflowui`, `packages/workflowui-*` |
+| AutoMetabuilder | `libraries/workflow`, `packages/workflow_editor`, `frontends/workflowui` *(merged 2026-08-11)*, `packages/workflowui-*` |
 | typthon | `scripts/python`, `scripts/*.py` |
 | cadquerywrapper | `libraries/cadquerywrapper` |
 | pcbgenerator | `libraries/pcbgenerator` *(confirmed near-identical, already in sync)* |
@@ -179,11 +179,9 @@ First pass at actually migrating code (not just mapping names) from `metabuilder
 | `frontends/postgres` | `postgres` | 2026-08-08 | 2026-01-16 |
 | `frontends/qt6` | `CPlusPlusQT6Skel` (corrected from an earlier wrong `pcbgenerator` guess) | 2026-08-03 | 2026-07-21 |
 
-**Still needs a decision — not a newer/older problem:**
-
-| Source | Existing repo | Why it's different |
-| --- | --- | --- |
-| `frontends/nextjs`, `frontends/workflowui` | `AutoMetabuilder` | Not a stale fork — `AutoMetabuilder`'s real README says it's "an AI-powered tool designed to integrate with the metabuilder SDLC workflow," a different product entirely from a platform/workflow-UI shell. Merging would produce an incoherent repo. Needs either a genuinely new repo for this content, or confirmation that `AutoMetabuilder` should become this instead. |
+**Resolved 2026-08-11:**
+- `frontends/workflowui` → merged into `AutoMetabuilder` (confirmed: workflow UI *is* the same product as AutoMetabuilder's AI-powered SDLC workflow tool, not a mismatch after all).
+- `frontends/nextjs` → **stays in `metabuilder`**, not migrated. It's the actual MetaBuilder platform UI itself, along with the admin/auth/dashboard packages it renders (`packages/admin*`, `ui_auth`, `ui_login`, `ui_permissions`, `role_editor`, `user_manager`, `audit_log`, `dashboard`, `nav_menu`, `ui_header/footer/home/intro/pages`, `notification_center`, `config_summary`) — these stay with it rather than being split elsewhere while the shell that consumes them remains in the fat repo.
 
 ## Progress Tracking
 
