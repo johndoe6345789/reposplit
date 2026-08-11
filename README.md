@@ -169,16 +169,21 @@ First pass at actually migrating code (not just mapping names) from `metabuilder
 - `frontends/repoforge`'s `portal/` folder (the one piece not already in `RepoForge`) added to `RepoForge`.
 - `frontends/cli`, `frontends/exploded-diagrams`, `frontends/storybook` — no existing match, created as new repos `cli`, `exploded-diagrams`, `storybook`.
 
-**Needs a decision before touching — destination already has substantial, independently-evolved content that a blind copy would corrupt:**
+**Resolved 2026-08-11 — merged newer into older.** For every diverged pair, `metabuilder`'s copy had the more recent commit date (as recent as Aug 10) vs. the standalone repos (dating back to Jan/Jul). Did an overlay merge: metabuilder's files overwrite matching paths, new files get added, nothing unique to the destination repo was deleted.
 
-| Source | Existing repo | Why it needs a decision |
+| Source | Existing repo | metabuilder last touched | destination last touched (pre-merge) |
+| --- | --- | --- | --- |
+| `frontends/dockerterminal` | `docker-swarm-termina` | 2026-08-07 | 2026-07-21 |
+| `frontends/gameengine` | `SDL3CPlusPlus` | 2026-06-25 | 2026-01-16 |
+| `frontends/pastebin` | `snippet-pastebin` | 2026-08-08 | 2026-01-21 |
+| `frontends/postgres` | `postgres` | 2026-08-08 | 2026-01-16 |
+| `frontends/qt6` | `CPlusPlusQT6Skel` (corrected from an earlier wrong `pcbgenerator` guess) | 2026-08-03 | 2026-07-21 |
+
+**Still needs a decision — not a newer/older problem:**
+
+| Source | Existing repo | Why it's different |
 | --- | --- | --- |
-| `frontends/dockerterminal` | `docker-swarm-termina` | Diverged fork — different docs, CAPROVER deployment scripts, different file set |
-| `frontends/gameengine` | `SDL3CPlusPlus` | Heavily diverged — destination is 508M vs 199M source, its own package/profile structure |
-| `frontends/nextjs`, `frontends/workflowui` | `AutoMetabuilder` | Likely the wrong match entirely — `AutoMetabuilder`'s real README says it's "an AI-powered tool designed to integrate with the metabuilder SDLC workflow," not a platform/workflow-UI shell |
-| `frontends/pastebin` | `snippet-pastebin` | Heavily diverged — destination is 65M vs 17M source, extensively built out on its own |
-| `frontends/postgres` | `postgres` | Destination is a completely different, real Next.js/Drizzle app ("Postgres with Web UI"), not a Python dashboard |
-| `frontends/qt6` | `CPlusPlusQT6Skel` (corrected from an earlier wrong `pcbgenerator` guess) | Diverged — same general idea (Qt6 skeleton) but different file structure on each side |
+| `frontends/nextjs`, `frontends/workflowui` | `AutoMetabuilder` | Not a stale fork — `AutoMetabuilder`'s real README says it's "an AI-powered tool designed to integrate with the metabuilder SDLC workflow," a different product entirely from a platform/workflow-UI shell. Merging would produce an incoherent repo. Needs either a genuinely new repo for this content, or confirmation that `AutoMetabuilder` should become this instead. |
 
 ## Progress Tracking
 
