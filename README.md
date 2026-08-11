@@ -77,6 +77,10 @@ Proper planning prevents piss poor performance. Keep it simple, stupid.
 - https://github.com/johndoe6345789/startup-types
 - https://github.com/johndoe6345789/accelerators
 - https://github.com/johndoe6345789/organisations
+- https://github.com/johndoe6345789/cli
+- https://github.com/johndoe6345789/exploded-diagrams
+- https://github.com/johndoe6345789/storybook
+- https://github.com/johndoe6345789/dockerterminal-backend
 
 ### Auxillery repos to support the other ones
 
@@ -163,6 +167,8 @@ No existing name fit these either. **Created and populated 2026-08-11**, sourced
 
 First pass at actually migrating code (not just mapping names) from `metabuilder/frontends/*`, 2026-08-11.
 
+**Trimmed 2026-08-11.** Every folder below has a confirmed destination, so `metabuilder/frontends/` now only contains `cli`, `nextjs`, and `qt6` — kept because metabuilder actively uses them as part of its own multi-frontend showcase. Everything else was removed from the fat repo.
+
 **Done — clean copy, no conflict:**
 - `caproverforge`, `frontends/packagerepo`, `libraries/pcbgenerator` were already byte-identical (or near-identical) to `CaproverForge`, `goodpackagerepo`, `pcbgenerator` — nothing to migrate, already in sync.
 - `frontends/emailclient` added to `email_client`.
@@ -186,7 +192,18 @@ First pass at actually migrating code (not just mapping names) from `metabuilder
 **Audited all 6 merges for the same "two apps" problem (2026-08-11).** Checking beyond the top level (matching entry points, build configs) found it wasn't isolated to AutoMetabuilder:
 - `SDL3CPlusPlus`, `postgres`, `snippet-pastebin` — clean. Only one entry point / build config each; the small additions (`postgres.py`, `pastebin.py`) are legitimate same-app management scripts, not a second app.
 - `CPlusPlusQT6Skel` — **had it too.** The merge interleaved metabuilder's `src/*.cpp` files into the same `src/` folder as the original skeleton's own `main.cpp`/`greeter.*`/`qml_curses_frontend.*`/`qml_parser.*`, and the new `CMakeLists.txt` only built the metabuilder side — orphaning the original's files and their tests. Reverted, removed the old skeleton's implementation and its now-dead tests, kept metabuilder's version as the sole app (kept non-conflicting tooling like `python/`, `third_party/`, `dev_tool.py`).
-- `docker-swarm-termina` — **partially had it.** `frontend/` was a clean same-app merge (kept). `backend/` was not: metabuilder's `dockerterminal` backend is C++/Drogon, while this repo's real backend is a substantial, tested Python app (17 test files — auth, websockets, docker client, etc.). Unlike the other two, discarding a working tested implementation isn't a call to make unilaterally, so `backend/` was reverted out and left as-is pending a decision: keep the Python backend, replace with metabuilder's C++ one, or keep both separated into subfolders?
+- `docker-swarm-termina` — **partially had it.** `frontend/` was a clean same-app merge (kept). `backend/` was not: metabuilder's `dockerterminal` backend is C++/Drogon, while this repo's real backend is a substantial, tested Python app (17 test files — auth, websockets, docker client, etc.). Unlike the other two, discarding a working tested implementation isn't a call to make unilaterally, so `backend/` was reverted out of `docker-swarm-termina`. Since `metabuilder/frontends/` needed trimming and this C++ backend had nowhere else to go, it now has its own repo: **`dockerterminal-backend`**.
+
+## Migration Status — `packages/`, `libraries/`, `services/` cleanup pass
+
+Before trimming `frontends/`, checked the remaining "Existing name" matches from the tables above that had never actually been migrated (only proposed). Several turned out to be wrong matches entirely, and most of the plausible ones already have *newer* content than the fat repo — so nothing was merged into them:
+
+- **Confirmed already in sync, no action needed:** `cadquerywrapper` ← `libraries/cadquerywrapper`, `SparkOS` ← `libraries/sparkos` (both byte-identical).
+- **Wrong matches — not the same product, don't merge:** `typthon` (it's a CPython interpreter fork, not a home for `scripts/python`), `nexus-command` (a React "Atomic Component Framework," not backend auth/infra services), `RevolutionaryWayToServeUpReactApps` (a codegen/project-generation tool, not a shared UI kit).
+- **Destination is newer than the fat repo — nothing to merge in:** `workforce-pay-bill-p`, `strategy-execution-p`, `pyracms_core`, `pyracms_gallery`, `pyracms_article` (all 2 weeks–2.5 months newer than their `businessplanner`/`next_extra_primary` counterparts). `low-code-react-app-b` is only hours newer and its `packages/` don't structurally match `form_builder`/`css_designer`/etc. anyway.
+- **Not yet checked:** `packages/package_manager`, `package_validator`, `github_tools` → `goodpackagerepo`.
+
+These weren't touched — no clean "newer wins" case to act on, and the wrong matches need real destinations decided separately rather than forced.
 
 ## Progress Tracking
 
