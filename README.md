@@ -92,6 +92,11 @@ Proper planning prevents piss poor performance. Keep it simple, stupid.
 - https://github.com/johndoe6345789/metabuilder_old
 - https://github.com/johndoe6345789/nextra-frontend
 - https://github.com/johndoe6345789/launchpad-frontend
+- https://github.com/johndoe6345789/wiki
+- https://github.com/johndoe6345789/comments
+- https://github.com/johndoe6345789/polls
+- https://github.com/johndoe6345789/gallery
+- https://github.com/johndoe6345789/blog
 - https://github.com/johndoe6345789/components
 - https://github.com/johndoe6345789/hooks
 - https://github.com/johndoe6345789/icons
@@ -129,7 +134,7 @@ Based on scanning the directory structure of the three fat repos (`packages/`, `
 | cadquerywrapper | `libraries/cadquerywrapper` |
 | pcbgenerator | `libraries/pcbgenerator` *(confirmed near-identical, already in sync)* |
 | CaproverForge | `frontends/caproverforge` *(confirmed byte-identical, already in sync)* |
-| pyracms_forum | `packages/forum_forge`, `social_hub`, `irc_webchat` |
+| ~~pyracms_forum~~ *(correction: pyracms is off-limits, see note below)* | `packages/forum_forge`, `social_hub`, `irc_webchat` — ended up in the bundled `packages` repo instead |
 
 No existing name fit these, so the proposed name is just the literal name of the source folder itself. **Created and populated 2026-08-11** — each was pushed to GitHub with the listed source paths copied in as-is.
 
@@ -157,9 +162,8 @@ These two share an almost identical `services/` layout — LaunchPad appears to 
 | RevolutionaryWayToServeUpReactApps | `shared/` (components, hooks, icons, interfaces, redux, schemas, scss, storybook, theme, constants), `services/design-system` |
 | strategy-execution-p (businessplanner only) | `hoshin`, `okr`, `pdca`, `pivot`, `decisions`, `weekly-review`, `scoping`, `kpi` |
 | workforce-pay-bill-p (businessplanner only) | `financials`, `xero`, `zelt` |
-| pyracms_core *(medium-weight repo, not a Single repo)* | `wiki`, `comments*`, `polls` |
-| pyracms_gallery | `gallery` |
-| pyracms_article | `blog` |
+
+**Correction (2026-08-11): `pyracms_core`/`pyracms_gallery`/`pyracms_article` are off-limits — pyracms is a separate, working project and shouldn't receive migrated content.** `wiki`, `comments`, `polls`, `gallery`, and `blog` got their own new repos instead (see below).
 
 No existing name fit these either. **Created and populated 2026-08-11**, sourced from `next_extra_primary` except the businessplanner-only rows, which came from `businessplanner`:
 
@@ -220,7 +224,8 @@ Before trimming `frontends/`, checked the remaining "Existing name" matches from
 
 - **Confirmed already in sync, no action needed:** `cadquerywrapper` ← `libraries/cadquerywrapper`, `SparkOS` ← `libraries/sparkos` (both byte-identical).
 - **Wrong matches — not the same product, don't merge:** `typthon` (it's a CPython interpreter fork, not a home for `scripts/python`), `nexus-command` (a React "Atomic Component Framework," not backend auth/infra services), `RevolutionaryWayToServeUpReactApps` (a codegen/project-generation tool, not a shared UI kit).
-- **Destination is newer than the fat repo — nothing to merge in:** `workforce-pay-bill-p`, `strategy-execution-p`, `pyracms_core`, `pyracms_gallery`, `pyracms_article` (all 2 weeks–2.5 months newer than their `businessplanner`/`next_extra_primary` counterparts). `low-code-react-app-b` is only hours newer and its `packages/` don't structurally match `form_builder`/`css_designer`/etc. anyway.
+- **Destination is newer than the fat repo — nothing to merge in:** `workforce-pay-bill-p`, `strategy-execution-p` (2 weeks–2.5 months newer than their `businessplanner` counterparts). `low-code-react-app-b` is only hours newer and its `packages/` don't structurally match `form_builder`/`css_designer`/etc. anyway.
+- **pyracms is off-limits entirely** (`pyracms_core`, `pyracms_gallery`, `pyracms_article`, `pyracms_forum`) — it's a separate, working project, not a migration destination. Don't merge anything into it, even if it looks like a newer/older match.
 - **Not yet checked:** `packages/package_manager`, `package_validator`, `github_tools` → `goodpackagerepo`.
 
 These weren't touched — no clean "newer wins" case to act on, and the wrong matches need real destinations decided separately rather than forced.
@@ -253,7 +258,9 @@ Bundled the remaining 68 packages (everything not already migrated to `codegen_s
 
 Same treatment as `metabuilder`: found and fixed the services that were never actually mapped, then trimmed both fat repos to just build/deploy tooling.
 
-**Newly mapped and migrated** (weren't in any table above): `alerts` → `notifications`; `analytics-service` → `analytics`; `auth-service`, `infra-service`, `user-lookup`, `user-preferences`, `user-profiles`, `user-search`, `user-stats` → `platform-core`; `comments-service` → `pyracms_core`; `gamification-service`, `progress` → `gamification`; `notifications-service` (dup of `alerts`, folded into `notifications`); `search-service` → `search`; `social-service` → `social`; `package-repository` → `goodpackagerepo`; `streaming` → `media_center`.
+**Newly mapped and migrated** (weren't in any table above): `alerts` → `notifications`; `analytics-service` → `analytics`; `auth-service`, `infra-service`, `user-lookup`, `user-preferences`, `user-profiles`, `user-search`, `user-stats` → `platform-core`; `gamification-service`, `progress` → `gamification`; `notifications-service` (dup of `alerts`, folded into `notifications`); `search-service` → `search`; `social-service` → `social`; `package-repository` → `goodpackagerepo`; `streaming` → `media_center`.
+
+**Correction (2026-08-11): `comments-service` was wrongly added to `pyracms_core`, then reverted** (`git revert`, pushed) — pyracms is a separate working project and isn't a migration target, full stop. That also meant `services/{wiki,comments,polls,gallery,blog}` — deleted from `next_extra_primary` earlier on the assumption pyracms covered them — had never actually been copied anywhere. Recovered them from git history and gave each its own new repo: [`wiki`](https://github.com/johndoe6345789/wiki), [`comments`](https://github.com/johndoe6345789/comments), [`polls`](https://github.com/johndoe6345789/polls), [`gallery`](https://github.com/johndoe6345789/gallery), [`blog`](https://github.com/johndoe6345789/blog).
 
 **`frontend/`** — no existing match for either, so each got a new repo: `next_extra_primary/frontend` → `nextra-frontend`, `businessplanner/frontend` → `launchpad-frontend`.
 
